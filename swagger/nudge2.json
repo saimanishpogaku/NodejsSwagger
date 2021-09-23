@@ -1,0 +1,152 @@
+{
+    "openapi": "3.0.1",
+    "servers": [
+        {
+            "url": "https://xyz-stage.com",
+            "description": "Staging Server"
+        },
+        {
+            "url": "https://xyz.com",
+            "description": "Prod Server"
+        },
+        {
+            "url": "https://xyz-preprod.zee5.com",
+            "description": "Pre-prod Server"
+        }
+    ],
+    "paths": {
+        "/user/fms2": {
+            "post": {
+                "summary": "abcd",
+                "description": "efg",
+                "operationId": "HIJKLMNOP",
+                "tags": [
+                    "Qrstuvw"
+                ],
+                "requestBody": {
+                    "description": "Request body to be sent",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401 (Auth header required)": {
+                        "description": "Authorization header required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthHeaderRequiredError"
+                                }
+                            }
+                        }
+                    },
+                    "200 (Success)": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "application/json": {
+                                    "schema": {
+                                        "": ""
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400 (Invalid vod_type)": {
+                        "description": "Invalid type",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InvalidType"
+                                }
+                            }
+                        }
+                    },
+                    "200 (No Transactions)": {
+                        "description": "No Transactions"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "RequestBody": {
+                "type": "object",
+                "properties": {
+                    "property1": {}
+                }
+            },
+            "SuccessResponse-1": {
+                "type": null,
+                "properties": "true"
+            },
+            "SuccessResponse-2": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "car"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "6uuy767t7"
+                    }
+                }
+            },
+            "InvalidType": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "number",
+                        "example": "400"
+                    },
+                    "message": {
+                        "type": "string",
+                        "example": "Invalid type"
+                    }
+                }
+            },
+            "AuthHeaderRequiredError": {
+                "title": "Authentication header required.",
+                "required": [
+                    "error_code",
+                    "error_msg"
+                ],
+                "properties": {
+                    "error_code": {
+                        "type": "number",
+                        "example": "401",
+                        "description": "Error code"
+                    },
+                    "error_msg": {
+                        "type": "string",
+                        "example": "Authentication header is required.",
+                        "description": "Error message"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "name": "Authorization",
+                "in": "header",
+                "type": "apiKey",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "Bearer token"
+            }
+        }
+    }
+}
